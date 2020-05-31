@@ -5,7 +5,7 @@ public class Main {
         String path = "";
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("--data")) {
-                path = args[i+1];
+                path = args[i + 1];
             }
         }
         SearchMachine searchMachine = new SearchMachine();

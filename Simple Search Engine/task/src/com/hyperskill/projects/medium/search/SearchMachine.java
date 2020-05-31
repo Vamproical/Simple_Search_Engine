@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class SearchMachine {
     Map<String, String> people = new LinkedHashMap<>();
     final Scanner scanner = new Scanner(System.in);
+
     private void searchPeople() {
         System.out.println("Enter a name or email to search all suitable people.");
         String search = scanner.nextLine();
@@ -34,12 +35,14 @@ public class SearchMachine {
             System.out.println("No matching people found.");
         }
     }
+
     private void printAll() {
         System.out.println("=== List of people ===");
-        for (var str: people.keySet()) {
+        for (var str : people.keySet()) {
             System.out.println((str + " " + people.get(str)).trim());
         }
     }
+
     public void chooseAction(String path) {
         ReadFile readFile = new ReadFile(path);
         people = readFile.readFile();
