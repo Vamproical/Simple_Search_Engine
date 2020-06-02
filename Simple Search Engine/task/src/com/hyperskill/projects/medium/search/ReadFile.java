@@ -2,9 +2,9 @@ package com.hyperskill.projects.medium.search;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class ReadFile {
     private final String pathToTheFile;
@@ -13,21 +13,12 @@ public class ReadFile {
         this.pathToTheFile = pathToTheFile;
     }
 
-    public Map<String, String> readFile() {
-        Map<String, String> result = new TreeMap<>();
+    public List<String> readFile() {
+        List<String> result = new ArrayList<>();
         try (final Scanner scan = new Scanner(new File(pathToTheFile))) {
             while (scan.hasNext()) {
-                String[] stringNameEmail = scan.nextLine().split(" ");
-                String name = stringNameEmail[0];
-                String surname = "";
-                String email = "";
-                if (stringNameEmail.length > 1) {
-                    surname = stringNameEmail[1];
-                }
-                if (stringNameEmail.length > 2) {
-                    email = stringNameEmail[2];
-                }
-                result.put(name + " " + surname, email);
+                String stringNameEmail = scan.nextLine();
+                result.add(stringNameEmail);
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not found.");
