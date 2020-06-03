@@ -1,6 +1,9 @@
 package com.hyperskill.projects.medium.search;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SearchEngine {
     Map<String, List<Integer>> invertedIndex;
@@ -24,13 +27,4 @@ public class SearchEngine {
         }
         return invertedMap;
     }
-
-    public ArrayList<Integer> searchPeople(String search) {
-        Set<Integer> posPeople = new HashSet<>();
-        if (invertedIndex.containsKey(search)) {
-            posPeople.addAll(invertedIndex.get(search));
-        }
-        return new ArrayList<>(posPeople);
-    }
-
 }

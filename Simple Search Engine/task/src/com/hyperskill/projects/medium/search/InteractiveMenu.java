@@ -21,6 +21,17 @@ public class InteractiveMenu {
         }
     }
 
+    private void printSearch(List<Integer> print) {
+        if (!print.isEmpty()) {
+            System.out.println(print.size() + "persons found:");
+            for (Integer person : print) {
+                System.out.println(listOfPeople.get(person));
+            }
+        } else {
+            System.out.println("No matching people found.");
+        }
+    }
+
     public void chooseAction() {
         boolean isNotWorking = true;
         while (isNotWorking) {
@@ -35,16 +46,33 @@ public class InteractiveMenu {
                     isNotWorking = false;
                     break;
                 case "1":
-                    System.out.println("Enter a name or email to search all suitable people.");
-                    String name = scanner.nextLine().toLowerCase().trim();
-                    List<Integer> people = invertedInd.searchPeople(name);
-                    if (!people.isEmpty()) {
-                        System.out.println(people.size() + "persons found:");
-                        for (Integer person : people) {
-                            System.out.println(listOfPeople.get(person));
-                        }
-                    } else {
-                        System.out.println("No matching people found.");
+                    System.out.println("Select a matching strategy: ALL, ANY, NONE");
+                    String select = scanner.nextLine().toLowerCase();
+                    ContextSearch contextSearch = new ContextSearch();
+                    switch (select) {
+                        case "all":
+                            contextSearch.setSearch(new SearchAll());
+                            System.out.println("Enter a name or email to search all suitable people.");
+                            String name = scanner.nextLine();
+                            List<Integer> people = contextSearch.searchPeople(name, invertedInd.invertedIndex);
+                            printSearch(people);
+                            break;
+                        case "any":
+                            contextSearch.setSearch(new SearchAny());
+                            System.out.println("Enter a name or email to search all suitable people.");
+                            name = scanner.nextLine();
+                            people = contextSearch.searchPeople(name, invertedInd.invertedIndex);
+                            printSearch(people);
+                            break;
+                        case "none":
+                            contextSearch.setSearch(new SearchNone());
+                            System.out.println("Enter a name or email to search all suitable people.");
+                            name = scanner.nextLine();
+                            people = contextSearch.searchPeople(name, invertedInd.invertedIndex);
+                            printSearch(people);
+                            break;
+                        default:
+                            System.out.println("Wrong strategy!");
                     }
                     break;
                 case "2":
